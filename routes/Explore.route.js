@@ -1,8 +1,10 @@
-import { Router } from "express";
-import { getReposWithLanguage } from "../controllers/Explore.controller.js";
+import express from "express";
 
-const router = Router();
+import { ensureAuthenticated } from "../middleware/Ensure.middleware.js";
+import { explorePopularRepos } from "../controllers/Explore.controller.js";
 
-router.use("/repos/:language", getReposWithLanguage);
+const router = express.Router();
+
+router.get("/repos/:language", ensureAuthenticated, explorePopularRepos);
 
 export default router;
