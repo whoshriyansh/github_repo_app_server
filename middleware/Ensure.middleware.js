@@ -1,3 +1,8 @@
+const isProduction = process.env.NODE_ENV === "production";
+
+const getCallbackURL = () =>
+  isProduction ? "http://3.109.2.38:3000" : "http://localhost:3000";
+
 export async function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -7,5 +12,5 @@ export async function ensureAuthenticated(req, res, next) {
     return res.status(401).json({ error: "Unauthorized. Please log in." });
   }
 
-  res.redirect(process.env.CLIENT_BASE_URL + "/login");
+  res.redirect(getCallbackURL() + "/login");
 }

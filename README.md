@@ -1,20 +1,19 @@
-
 # GitHub lookalike App Server/Backend
 
 This backend server powers a GitHub lookalike application, allowing users to sign in with their GitHub accounts, search for repositories, and like repositories. It leverages the GitHub API for repository data and uses Passport for GitHub authentication.
-
-
 
 ## Features
 
 - GitHub Authentication: Users can sign in using their GitHub accounts, facilitated by the Passport library for secure OAuth authentication.
 - Repository Search: Users can search for repositories directly from GitHub, with results fetched and displayed in the application.
 - Repository Likes: Users can like repositories, with functionality integrated to manage and store these interactions.
+
 ## Tech Stack and Libraries
 
 **Server:** Node, Express, Mongoose, JsonWebToken, Bcrypt JS,, Passport, nodemon
 
 **Database:** MongoDB
+
 ## Run on your System
 
 Clone the project
@@ -47,26 +46,28 @@ Start the server in Production Env.
 npm run start
 ```
 
-
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`MONGO_URI`  
+`MONGO_URI`
 
-`PORT` 
+`PORT`
 
-`GITHUB_API_KEY`
+`GIT_API_KEY`
 
-`GITHUB_CLIENT_ID`
+`GIT_CLIENT_ID`
 
-`GITHUB_CLIENT_SECRET`
+`GIT_CLIENT_SECRET`
 
 `CLIENT_BASE_URL`
+
 ## Authors
 
 - [@whoshriyansh](https://www.linkedin.com/in/whoshriyansh/)
+
 ## 🔗 Links
+
 [![portfolio](https://img.shields.io/badge/my_portfolio-orange?style=for-the-badge&logo=ko-fi&logoColor=white)](https://whoshriyansh.vercel.app/)
 
 [![linkedin](https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=LinkedIn&logoColor=white)](https://www.linkedin.com/in/whoshriyansh/)

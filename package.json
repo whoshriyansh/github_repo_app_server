@@ -5,7 +5,8 @@
   "main": "Server.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon Server.js"
+    "start": "NODE_ENV=production node Server.js",
+    "dev": "NODE_ENV=development nodemon Server.js"
   },
   "author": "Shriyansh Lohia",
   "license": "ISC",

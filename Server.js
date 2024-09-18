@@ -16,14 +16,17 @@ import connectMongoDB from "./db/ConnectDB.js";
 dotenv.config();
 
 const app = express();
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
 
-const PORT = process.env.PORT || 5000;
+const getCorsOptions = () => {
+  const isProduction = process.env.NODE_ENV === "production";
+  return {
+    origin: isProduction ? "http://3.109.2.38:3000" : "http://localhost:3000",
+    credentials: true,
+  };
+};
+app.use(cors(getCorsOptions()));
+
+const PORT = 4000;
 const __dirname = path.resolve();
 
 app.use(

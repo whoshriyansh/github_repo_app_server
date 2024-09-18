@@ -5,6 +5,13 @@ import User from "../models/User.model.js";
 
 dotenv.config();
 
+const isProduction = process.env.NODE_ENV === "production";
+
+const getCallbackURL = () =>
+  isProduction
+    ? "http://3.109.2.38:4000/api/auth/github/callback"
+    : "http://localhost:4000/api/auth/github/callback";
+
 passport.serializeUser(function (user, done) {
   done(null, user);
 });
@@ -16,9 +23,9 @@ passport.deserializeUser(function (obj, done) {
 passport.use(
   new GitHubStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "http://localhost:4000/api/auth/github/callback",
+      clientID: process.env.GIT_CLIENT_ID,
+      clientSecret: process.env.GIT_CLIENT_SECRET,
+      callbackURL: getCallbackURL(),
     },
     async function (accessToken, refreshToken, profile, done) {
       const user = await User.findOne({ username: profile.username });

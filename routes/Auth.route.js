@@ -1,6 +1,11 @@
 import express from "express";
 import passport from "passport";
 
+const isProduction = process.env.NODE_ENV === "production";
+
+const getCallbackURL = () =>
+  isProduction ? "http://3.109.2.38:3000" : "http://localhost:3000";
+
 const router = express.Router();
 
 router.get(
@@ -11,10 +16,10 @@ router.get(
 router.get(
   "/github/callback",
   passport.authenticate("github", {
-    failureRedirect: process.env.CLIENT_BASE_URL + "/login",
+    failureRedirect: getCallbackURL() + "/login",
   }),
   function (req, res) {
-    res.redirect(process.env.CLIENT_BASE_URL);
+    res.redirect(getCallbackURL());
   }
 );
 
