@@ -6,7 +6,6 @@ import session from "express-session";
 import path from "path";
 
 import "./passport/Github.auth.js";
-
 import userRoutes from "./routes/User.route.js";
 import exploreRoutes from "./routes/Explore.route.js";
 import authRoutes from "./routes/Auth.route.js";
@@ -32,18 +31,29 @@ const __dirname = path.resolve();
 app.use(
   session({ secret: "keyboard cat", resave: false, saveUninitialized: false })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(express.static(path.join(__dirname, "..", "client", "dist")));
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/explore", exploreRoutes);
 
-app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+  res.sendFile(
+    path.join(__dirname, "..", "client", "dist", "index.html"),
+    (err) => {
+      if (err) {
+        console.error("Error sending file:", err);
+        res.status(err.status).end();
+      }
+    }
+  );
 });
 
 app.listen(PORT, () => {
